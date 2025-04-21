@@ -1,159 +1,44 @@
-<!DOCTYPE html>
-<html lang="ru">
+<!doctype html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>🔥 Плавный Слайдер</title>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: sans-serif;
-            background: #f5f5f5;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
-
-        .slider-container {
-            position: relative;
-            width: 1000px;
-            height: 320px;
-            overflow: hidden;
-        }
-
-        .slider {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 20px;
-            transition: transform 1s ease-in-out; /* Плавная анимация */
-        }
-
-        .slide {
-            width: 150px;
-            height: 200px;
-            background-color: #3498db;
-            color: white;
-            font-size: 30px;
-            font-weight: bold;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            border-radius: 12px;
-            opacity: 0.4;
-            transform: scale(0.8);
-            pointer-events: none;
-            transition: all 0.6s ease;
-        }
-
-        .slide.middle-left,
-        .slide.middle-right {
-            opacity: 0.6;
-            transform: scale(0.9);
-        }
-
-        .slide.active {
-            width: 250px;
-            height: 250px;
-            opacity: 1;
-            transform: scale(1);
-            background-color: #2ecc71;
-            z-index: 2;
-        }
-
-        /* Стиль кнопок */
-        .nav-btn {
-            font-size: 24px;
-            background: #333;
-            color: white;
-            border: none;
-            border-radius: 50%;
-            width: 45px;
-            height: 45px;
-            cursor: pointer;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-            z-index: 10;
-        }
-
-        .nav-btn:hover {
-            background: #444;
-        }
-
-        .btn-container {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            margin-top: 20px;
-        }
-
-    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/pages/index.css">
+    <link rel="stylesheet" href="./css/global/index.css">
+    <title>Document</title>
 </head>
 <body>
+<div class="wrapper">
+    <header class="header">
+        <div class="header__container">
+            <div class="info__logo">
+                <img class="logo" src="./img/header/Mask%20group.svg">
+                <div class="info">
+                    <p class="number__header">8 800 555 80 80</p>
+                    <button type="submit" class="btn__call">Заказать звонок</button>
+                </div>
+            </div>
+        </div>
 
-<div class="slider-container">
-    <div class="slider" id="slider">
-        <!-- Слайды добавятся через JS -->
-    </div>
+        <div class="Shann__container">
+            <div class="flex">
+                <div class="text__Shann">
+                    <p class="logo__text__Shann">электромобильный вилочный погрузчик <span class="span__text__Shann">нового поколения SHANN</span> </p>
+                    <p class="callback__info">Оставьте заявку и получите консультацию специалиста</p>
+                </div>
+                <div class="callback__btn">
+                    <button type="submit" class="btn__Shann">Получить предложение</button>
+                    <p class="callback-text">
+                        <img src="img/Shann/ic_baseline-local-phone.svg" alt="иконка телефона" class="phone-icon">
+                        Перезвоним в течение дня для консультации
+                    </p>
+                </div>
+            </div>
+            <div class="img__Shann">
+                <img class="tractor" src="img/Shann/image%20146.png">
+            </div>
+        </div>
+    </header>
 </div>
-
-<!-- Кнопки снизу -->
-<div class="btn-container">
-    <button class="nav-btn" id="prev">←</button>
-    <button class="nav-btn" id="next">→</button>
-</div>
-
-<script>
-    const slideData = [1, 2, 3, 4, 5, 6, 7, 8]; // можно сколько угодно слайдов
-    const slider = document.getElementById('slider');
-    let centerIndex = 0;
-
-    function renderSlides() {
-        slider.innerHTML = '';
-
-        // Создание слайдов
-        for (let i = -2; i <= 2; i++) {
-            const index = (centerIndex + i + slideData.length) % slideData.length;
-            const slide = document.createElement('div');
-            slide.classList.add('slide');
-            slide.textContent = slideData[index];
-
-            // Размещение слайдов в нужном порядке
-            if (i === 0) {
-                slide.classList.add('active');
-            } else if (i === -1) {
-                slide.classList.add('middle-left');
-            } else if (i === 1) {
-                slide.classList.add('middle-right');
-            }
-
-            slider.appendChild(slide);
-        }
-    }
-
-    // Функция для плавного перехода
-    function smoothTransition() {
-        slider.style.transition = 'none'; // Отключаем временно анимацию
-        renderSlides(); // Перерисовываем слайды
-        setTimeout(() => {
-            slider.style.transition = 'transform 1s ease-in-out'; // Включаем плавный переход
-        }, 50); // Маленькая задержка перед возвращением анимации
-    }
-
-    // Обработчик для кнопки "предыдущий"
-    document.getElementById('prev').addEventListener('click', () => {
-        centerIndex = (centerIndex - 1 + slideData.length) % slideData.length;
-        smoothTransition(); // Плавный переход
-    });
-
-    // Обработчик для кнопки "следующий"
-    document.getElementById('next').addEventListener('click', () => {
-        centerIndex = (centerIndex + 1) % slideData.length;
-        smoothTransition(); // Плавный переход
-    });
-
-    renderSlides(); // Начальный рендер слайдов
-</script>
-
 </body>
 </html>
